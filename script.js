@@ -226,4 +226,3 @@ function enemyAttackTurn() {
 window.onload = () => {
   renderStarterSelection();
 };
-
