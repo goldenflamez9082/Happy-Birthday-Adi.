@@ -10,35 +10,7 @@
       margin: 0;
       padding: 0;
     }
-        <hr>
-        <!-- Birthday Balloon Pop Game -->
-        <section>
-          <h2>🎈 Birthday Balloon Pop Game 🎈</h2>
-          <p>Click the balloons to pop them! 🎉</p>
-          <div id="balloon-container"></div>
-          <p id="score">Score: 0</p>
-        </section>
-        <script>
-        const balloonContainer = document.getElementById('balloon-container');
-        const scoreDisplay = document.getElementById('score');
-        let score = 0;
-
-        // Create 10 balloons
-        for (let i = 0; i < 10; i++) {
-          const balloon = document.createElement('span');
-          balloon.textContent = '🎈';
-          balloon.style.fontSize = '2.5em';
-          balloon.style.cursor = 'pointer';
-          balloon.style.margin = '10px';
-          balloon.onclick = function() {
-            balloon.textContent = '💥';
-            balloon.style.pointerEvents = 'none';
-            score++;
-            scoreDisplay.textContent = 'Score: ' + score;
-          };
-          balloonContainer.appendChild(balloon);
-        }
-        </script>
+    
     </style>
     <script>
         alert("Happy birthday Adi")
