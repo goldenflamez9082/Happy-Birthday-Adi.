@@ -107,7 +107,7 @@ const gyms = [
 
 // ==================== GAME STATE ====================
 let currentGym = 0;
-let playerTeam = [];
+let playerTeam = [1];
 let player, enemy, playerHP, enemyHP, playerAttack, enemyAttack, level=1, evoStage=0;
 
 // ==================== UTILS ====================
