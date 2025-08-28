@@ -1,4 +1,4 @@
-window.onload = function() {
+window.addEventListener('DOMContentLoaded', function() {
   const balloonContainer = document.getElementById('balloon-container');
   const scoreDisplay = document.getElementById('score');
   let score = 0;
@@ -14,4 +14,8 @@ window.onload = function() {
       balloon.textContent = '💥';
       balloon.style.pointerEvents = 'none';
       score++;
-      scoreDisplay.textContent = 'Score: ' +
+      scoreDisplay.textContent = 'Score: ' + score;
+    };
+    balloonContainer.appendChild(balloon);
+  }
+});
