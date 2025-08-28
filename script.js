@@ -3,165 +3,149 @@ const moves = {
   fire: [
     { name: "Scratch", power: 4 },
     { name: "Ember", power: 6 },
-    { name: "Flame Wheel", power: 8 },
-    { name: "Fire Spin", power: 7 },
-    { name: "Flamethrower", power: 10 },
-    { name: "Fire Fang", power: 8 },
-    { name: "Inferno", power: 12 },
-    { name: "Fire Punch", power: 9 },
-    { name: "Heat Wave", power: 11 },
-    { name: "Fire Blast", power: 13 }
+    { name: "Flamethrower", power: 10 }
   ],
   water: [
-    { name: "Splash", power: 1 },
     { name: "Water Gun", power: 6 },
     { name: "Bubble", power: 5 },
-    { name: "Surf", power: 10 },
-    { name: "Aqua Tail", power: 8 },
-    { name: "Hydro Pump", power: 12 },
-    { name: "Water Pulse", power: 7 },
-    { name: "Waterfall", power: 9 },
-    { name: "Scald", power: 10 },
-    { name: "Ice Beam", power: 11 }
+    { name: "Surf", power: 10 }
   ],
   grass: [
-    { name: "Tackle", power: 4 },
     { name: "Vine Whip", power: 6 },
     { name: "Razor Leaf", power: 10 },
-    { name: "Leaf Blade", power: 9 },
-    { name: "Solar Beam", power: 12 },
-    { name: "Seed Bomb", power: 8 },
-    { name: "Leech Seed", power: 5 },
-    { name: "Energy Ball", power: 10 },
-    { name: "Petal Dance", power: 11 },
-    { name: "Power Whip", power: 12 }
+    { name: "Solar Beam", power: 12 }
   ],
   electric: [
     { name: "Thunder Shock", power: 6 },
     { name: "Spark", power: 7 },
-    { name: "Thunder Fang", power: 8 },
-    { name: "Discharge", power: 9 },
-    { name: "Thunderbolt", power: 10 },
-    { name: "Thunder", power: 12 },
-    { name: "Volt Tackle", power: 11 },
-    { name: "Electro Ball", power: 9 },
-    { name: "Charge Beam", power: 8 },
-    { name: "Wild Charge", power: 11 }
+    { name: "Thunderbolt", power: 10 }
   ],
   flying: [
     { name: "Gust", power: 5 },
-    { name: "Air Slash", power: 10 },
     { name: "Wing Attack", power: 6 },
-    { name: "Aerial Ace", power: 8 },
-    { name: "Sky Attack", power: 12 },
-    { name: "Hurricane", power: 12 },
-    { name: "Drill Peck", power: 9 },
-    { name: "Peck", power: 4 },
-    { name: "Fly", power: 10 },
-    { name: "Brave Bird", power: 11 }
+    { name: "Air Slash", power: 10 }
   ],
   rock: [
     { name: "Rock Throw", power: 6 },
-    { name: "Rock Slide", power: 9 },
-    { name: "Smack Down", power: 8 },
-    { name: "Stone Edge", power: 12 }
+    { name: "Rock Slide", power: 9 }
+  ],
+  psychic: [
+    { name: "Confusion", power: 7 },
+    { name: "Psybeam", power: 9 }
   ]
 };
 
 // ==================== STARTERS ====================
 const starters = [
   { line: [
-    { name: "Bulbasaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", hp: 20, evolveLevel: 5 },
-    { name: "Ivysaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png", hp: 28, evolveLevel: 10 },
+    { name: "Bulbasaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/1.png", hp: 20 },
+    { name: "Ivysaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/2.png", hp: 28 },
     { name: "Venusaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png", hp: 40 }
   ]},
   { line: [
-    { name: "Charmander", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", hp: 20, evolveLevel: 5 },
-    { name: "Charmeleon", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png", hp: 28, evolveLevel: 10 },
+    { name: "Charmander", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/4.png", hp: 20 },
+    { name: "Charmeleon", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/5.png", hp: 28 },
     { name: "Charizard", type: "fire/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png", hp: 42 }
   ]},
   { line: [
-    { name: "Squirtle", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", hp: 20, evolveLevel: 5 },
-    { name: "Wartortle", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png", hp: 28, evolveLevel: 10 },
+    { name: "Squirtle", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/7.png", hp: 20 },
+    { name: "Wartortle", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/8.png", hp: 28 },
     { name: "Blastoise", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png", hp: 40 }
   ]}
 ];
 
-// ==================== GYMS / ELITE / CHAMPION ====================
+// ==================== GYMS / ELITE FOUR / CHAMPION ====================
 const gyms = [
-  { name: "Brock", team: [
+  { name: "Brock (Rock)", team: [
       { name: "Onix", type: "rock", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png", hp: 30 },
       { name: "Geodude", type: "rock", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/74.png", hp: 25 }
     ]
   },
-  { name: "Misty", team: [
+  { name: "Misty (Water)", team: [
       { name: "Starmie", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/121.png", hp: 28 },
       { name: "Psyduck", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/54.png", hp: 22 }
     ]
   },
-  { name: "Lt. Surge", team: [
+  { name: "Lt. Surge (Electric)", team: [
       { name: "Raichu", type: "electric", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/26.png", hp: 30 },
       { name: "Electabuzz", type: "electric", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/125.png", hp: 28 }
     ]
   },
-  { name: "Erika", team: [
-      { name: "Vileplume", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png", hp: 28 },
-      { name: "Tangela", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png", hp: 26 }
+  { name: "Erika (Grass)", team: [
+      { name: "Tangela", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/114.png", hp: 28 },
+      { name: "Vileplume", type: "grass/poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/45.png", hp: 32 }
     ]
   },
-  { name: "Korrina", team: [
-      { name: "Machamp", type: "fighting", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png", hp: 32 },
-      { name: "Lucario", type: "fighting/steel", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/448.png", hp: 30 }
+  { name: "Koga (Poison)", team: [
+      { name: "Muk", type: "poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/89.png", hp: 28 },
+      { name: "Weezing", type: "poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/110.png", hp: 30 }
+    ]
+  },
+  { name: "Sabrina (Psychic)", team: [
+      { name: "Alakazam", type: "psychic", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/65.png", hp: 30 },
+      { name: "Kadabra", type: "psychic", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/64.png", hp: 28 }
+    ]
+  },
+  { name: "Blaine (Fire)", team: [
+      { name: "Arcanine", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/59.png", hp: 32 },
+      { name: "Magmar", type: "fire", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/126.png", hp: 28 }
+    ]
+  },
+  { name: "Giovanni (Ground)", team: [
+      { name: "Rhydon", type: "ground/rock", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/112.png", hp: 35 },
+      { name: "Dugtrio", type: "ground", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/51.png", hp: 25 }
     ]
   },
   { name: "Elite Four Lorelei", team: [
-      { name: "Dewgong", type: "ice/water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png", hp: 28 },
-      { name: "Cloyster", type: "ice/water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/91.png", hp: 26 }
+      { name: "Dewgong", type: "water/ice", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/87.png", hp: 28 },
+      { name: "Cloyster", type: "water/ice", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/91.png", hp: 32 },
+      { name: "Slowbro", type: "water/psychic", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/80.png", hp: 30 }
     ]
   },
   { name: "Elite Four Bruno", team: [
       { name: "Hitmonchan", type: "fighting", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/107.png", hp: 28 },
-      { name: "Machamp", type: "fighting", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/68.png", hp: 30 }
+      { name: "Hitmonlee", type: "fighting", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/106.png", hp: 28 },
+      { name: "Onix", type: "rock", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/95.png", hp: 30 }
     ]
   },
   { name: "Elite Four Agatha", team: [
       { name: "Gengar", type: "ghost/poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/94.png", hp: 30 },
+      { name: "Haunter", type: "ghost/poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/93.png", hp: 28 },
       { name: "Arbok", type: "poison", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/24.png", hp: 28 }
     ]
   },
   { name: "Elite Four Lance", team: [
-      { name: "Dragonite", type: "dragon/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/149.png", hp: 32 },
-      { name: "Gyarados", type: "water/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png", hp: 30 }
+      { name: "Gyarados", type: "water/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/130.png", hp: 32 },
+      { name: "Dragonair", type: "dragon", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/148.png", hp: 28 },
+      { name: "Aerodactyl", type: "rock/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/142.png", hp: 30 }
     ]
   },
   { name: "Champion", team: [
-      { name: "Charizard", type: "fire/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png", hp: 32 },
-      { name: "Blastoise", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png", hp: 32 },
-      { name: "Venusaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png", hp: 32 }
+      { name: "Charizard", type: "fire/flying", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/6.png", hp: 40 },
+      { name: "Blastoise", type: "water", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/9.png", hp: 40 },
+      { name: "Venusaur", type: "grass", img: "https://raw.githubusercontent.com/PokeAPI/sprites/master/sprites/pokemon/3.png", hp: 40 }
     ]
   }
 ];
 
 // ==================== GAME STATE ====================
-let currentGym = 0;
 let playerTeam = [];
 let activePlayer, activeEnemy;
 let playerHP, enemyHP;
 let enemyTeam = [];
-let level = 1;
-let evoStage = 0;
+let currentGym = 0;
 
 // ==================== UTILS ====================
 function randomChoice(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 function typeEffectiveness(moveType, targetType){
-  // Simple type chart: only basic weaknesses for demonstration
   const chart = {
     fire: { grass: 2, water: 0.5, rock: 0.5 },
-    water: { fire: 2, grass: 0.5, electric: 0.5 },
+    water: { fire: 2, grass: 0.5, rock: 2 },
     grass: { water: 2, fire: 0.5, rock: 2 },
-    electric: { water: 2, ground: 0.5, flying: 2 },
+    electric: { water: 2, flying: 2 },
+    flying: { grass: 2, electric: 0.5 },
     rock: { fire: 2, flying: 2 },
-    flying: { grass: 2, electric: 0.5 }
+    psychic: { fighting: 2, poison: 2 }
   };
   const targets = targetType.split("/");
   let multiplier = 1;
@@ -171,6 +155,104 @@ function typeEffectiveness(moveType, targetType){
   return multiplier;
 }
 
-// ==================== REST OF GAME LOGIC ====================
-// Starter selection, battle loops, AI, move selection, switch Pokémon, evolution, crate drop
-// (use same structure from previous working code, just swap in this new gyms array and typeEffectiveness for damage multipliers)
+// ==================== STARTER SELECTION ====================
+function renderStarterSelection(){
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "<h3>Choose your starter:</h3>";
+  starters.forEach((starter, idx)=>{
+    const btn = document.createElement('button');
+    const base = starter.line[0];
+    btn.innerHTML = `<img src="${base.img}" width="50"><br>${base.name}`;
+    btn.onclick = ()=>startGame(idx);
+    gameDiv.appendChild(btn);
+  });
+}
+
+// ==================== GAME START ====================
+function startGame(starterIdx){
+  playerTeam = [{...starters[starterIdx].line[0]}];
+  activePlayer = {...playerTeam[0]};
+  playerHP = activePlayer.hp;
+  currentGym = 0;
+  startGym();
+}
+
+// ==================== START GYM ====================
+function startGym(){
+  enemyTeam = gyms[currentGym].team.map(p=>({...p}));
+  activeEnemy = {...enemyTeam[0]};
+  enemyHP = activeEnemy.hp;
+  renderBattle(`Battle vs ${gyms[currentGym].name}`);
+}
+
+// ==================== BATTLE ====================
+function renderBattle(message){
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = `
+    <h3>${message}</h3>
+    <div style="display:flex;justify-content:center;gap:50px;">
+      <div><img src="${activePlayer.img}" width="80"><br>${activePlayer.name}<br>HP: ${playerHP}</div>
+      <div><img src="${activeEnemy.img}" width="80"><br>${activeEnemy.name}<br>HP: ${enemyHP}</div>
+    </div>
+    <h4>Choose Move:</h4>
+    <div id="moves"></div>
+    <button onclick="switchPlayer()">Switch Pokémon</button>
+  `;
+  const moveDiv = document.getElementById('moves');
+  moves[activePlayer.type.split("/")[0]].forEach(m=>{
+    const btn = document.createElement('button');
+    btn.textContent = m.name;
+    btn.onclick = ()=>playerAttack(m);
+    moveDiv.appendChild(btn);
+  });
+}
+
+// ==================== PLAYER ATTACK ====================
+function playerAttack(move){
+  const multiplier = typeEffectiveness(move.name.split(" ")[0].toLowerCase(), activeEnemy.type);
+  const damage = move.power * multiplier;
+  enemyHP -= damage;
+  if(enemyHP <= 0){
+    enemyTeam.shift();
+    if(enemyTeam.length>0){
+      activeEnemy = {...enemyTeam[0]};
+      enemyHP = activeEnemy.hp;
+      alert(`Enemy switched to ${activeEnemy.name}`);
+    } else {
+      alert(`You defeated ${gyms[currentGym].name}!`);
+      currentGym++;
+      if(currentGym<gyms.length) startGym();
+      else { document.getElementById('game').innerHTML="<h2>Congratulations! You beat all gyms and Champion!</h2>"; return; }
+    }
+  }
+  enemyTurn();
+}
+
+// ==================== ENEMY ATTACK ====================
+function enemyTurn(){
+  const movePool = moves[activeEnemy.type.split("/")[0]];
+  const move = randomChoice(movePool);
+  const damage = move.power * typeEffectiveness(move.name.split(" ")[0].toLowerCase(), activePlayer.type);
+  playerHP -= damage;
+  if(playerHP <= 0) alert("You lost!");
+  else renderBattle(`Enemy used ${move.name}!`);
+}
+
+// ==================== SWITCH PLAYER POKÉMON ====================
+function switchPlayer(){
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "<h3>Choose a Pokémon:</h3>";
+  playerTeam.forEach((poke)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = `<img src="${poke.img}" width="50"><br>${poke.name} HP:${poke.hp}`;
+    btn.onclick = ()=>{
+      activePlayer = {...poke};
+      playerHP = activePlayer.hp;
+      renderBattle(`You switched to ${activePlayer.name}`);
+    };
+    gameDiv.appendChild(btn);
+  });
+}
+
+// ==================== INIT ====================
+window.addEventListener('DOMContentLoaded', renderStarterSelection);
