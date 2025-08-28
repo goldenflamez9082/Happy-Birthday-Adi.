@@ -93,128 +93,195 @@ const starters = [
 
 // ==================== GYMS / ELITE / CHAMPION ====================
 const gyms = [
-  { name: "Brock", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Misty", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Lt. Surge", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Erika", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Korrina", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Elite Four Lorelei", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Elite Four Bruno", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Elite Four Agatha", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Elite Four Lance", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) },
-  { name: "Champion", getPokemon: playerTeam => ({ ...playerTeam[playerTeam.length-1] }) }
+  { name: "Brock", team: [starters[0].line[1], starters[0].line[2]] },
+  { name: "Misty", team: [starters[2].line[1], starters[2].line[2]] },
+  { name: "Lt. Surge", team: [starters[1].line[1], starters[1].line[2]] },
+  { name: "Erika", team: [starters[0].line[2], starters[0].line[1]] },
+  { name: "Korrina", team: [starters[1].line[2], starters[1].line[1]] },
+  { name: "Elite Four Lorelei", team: [starters[2].line[2], starters[2].line[1]] },
+  { name: "Elite Four Bruno", team: [starters[1].line[2], starters[1].line[1]] },
+  { name: "Elite Four Agatha", team: [starters[0].line[2], starters[0].line[1]] },
+  { name: "Elite Four Lance", team: [starters[1].line[2], starters[1].line[1]] },
+  { name: "Champion", team: [starters[2].line[2], starters[2].line[1]] }
 ];
 
 // ==================== GAME STATE ====================
 let currentGym = 0;
-let playerTeam = [6];
-let player, enemy, playerHP, enemyHP, playerAttack, enemyAttack, level=1, evoStage=0;
+let playerTeam = [];
+let activePlayer, activeEnemy;
+let playerHP, enemyHP;
+let level = 1;
+let evoStage = 0;
 
 // ==================== UTILS ====================
 function randomChoice(arr){ return arr[Math.floor(Math.random()*arr.length)]; }
 
-// ==================== RENDER STARTER ====================
+// ==================== STARTER SELECTION ====================
 function renderStarterSelection(){
-  const gameDiv=document.getElementById('game');
-  gameDiv.innerHTML="<h3>Choose your starter:</h3>";
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "<h3>Choose your starter:</h3>";
   starters.forEach((starter, idx)=>{
-    const btn=document.createElement('button');
-    const base=starter.line[0];
-    btn.innerHTML=`<img src="${base.img}" width="50"><br>${base.name}`;
-    btn.onclick=()=>startGame(idx);
-    btn.style.margin="10px";
+    const btn = document.createElement('button');
+    const base = starter.line[0];
+    btn.innerHTML = `<img src="${base.img}" width="50"><br>${base.name}`;
+    btn.onclick = ()=>startGame(idx);
+    btn.style.margin = "10px";
     gameDiv.appendChild(btn);
   });
 }
 
-// ==================== GAME LOOP ====================
+// ==================== GAME START ====================
 function startGame(starterIdx){
-  evoStage=0;
-  playerTeam=[{...starters[starterIdx].line[evoStage]}];
-  player={...playerTeam[0]};
-  playerHP=player.hp;
-  playerAttack=player.hp/4|0;
-  level=1;
-  currentGym=0;
+  evoStage = 0;
+  playerTeam = [{...starters[starterIdx].line[evoStage]}];
+  activePlayer = {...playerTeam[0]};
+  playerHP = activePlayer.hp;
+  level = 1;
+  currentGym = 0;
   nextGym();
 }
 
 // ==================== NEXT GYM ====================
 function nextGym(){
-  if(currentGym>=gyms.length){
-    document.getElementById('game').innerHTML="<h3>Congratulations! You beat all gyms and the Champion! 🎉</h3>";
+  if(currentGym >= gyms.length){
+    document.getElementById('game').innerHTML = "<h3>Congratulations! You beat all gyms and the Champion! 🎉</h3>";
     return;
   }
-  enemy={...gyms[currentGym].getPokemon(playerTeam)};
-  enemyHP=enemy.hp+level*2;
-  enemyAttack=Math.floor(enemyHP/4);
-  renderBattle(`Gym Leader: ${gyms[currentGym].name}`);
+  enemyTeam = gyms[currentGym].team.map(p=>({...p}));
+  choosePlayerPokemon();
+}
+
+// ==================== PLAYER POKEMON CHOICE ====================
+function choosePlayerPokemon(){
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "<h3>Choose a Pokémon for battle:</h3>";
+  playerTeam.forEach((poke)=>{
+    const btn = document.createElement('button');
+    btn.innerHTML = `<img src="${poke.img}" width="50"><br>${poke.name} HP:${poke.hp}`;
+    btn.onclick = ()=>{
+      activePlayer = {...poke};
+      playerHP = activePlayer.hp + level*2;
+      startEnemyPokemon();
+    };
+    btn.style.margin = "10px";
+    gameDiv.appendChild(btn);
+  });
+}
+
+// ==================== START ENEMY POKEMON ====================
+function startEnemyPokemon(){
+  activeEnemy = {...enemyTeam[0]};
+  enemyHP = activeEnemy.hp + level*2;
+  renderBattle(`Battle vs ${gyms[currentGym].name}!`);
 }
 
 // ==================== BATTLE ====================
 function renderBattle(message=""){
-  const gameDiv=document.getElementById('game');
-  gameDiv.innerHTML=`
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = `
     <h3>${message}</h3>
-    <div style="display:flex;align-items:center;gap:40px;justify-content:center;">
+    <div style="display:flex;justify-content:center;gap:50px;">
       <div>
-        <img src="${player.img}" width="80"><br>
-        <b>${player.name}</b> (Lv ${level})<br>HP: ${playerHP}
+        <img src="${activePlayer.img}" width="80"><br>
+        <b>${activePlayer.name}</b><br>HP: ${playerHP}
       </div>
       <div>
-        <img src="${enemy.img}" width="80"><br>
-        <b>${enemy.name}</b><br>HP: ${enemyHP}
+        <img src="${activeEnemy.img}" width="80"><br>
+        <b>${activeEnemy.name}</b><br>HP: ${enemyHP}
       </div>
     </div>
-    <button id="attackBtn">Attack</button>
-    <p>${message}</p>
+    <h4>Choose Move:</h4>
+    <div id="moveButtons"></div>
+    <button id="switchBtn">Switch Pokémon</button>
   `;
-  document.getElementById('attackBtn').onclick=playerAttackTurn;
+  const moveDiv = document.getElementById('moveButtons');
+  const playerMoves = moves[activePlayer.type.split("/")[0]];
+  playerMoves.forEach(move=>{
+    const btn = document.createElement('button');
+    btn.textContent = move.name;
+    btn.onclick = ()=>playerAttackTurn(move);
+    btn.style.margin = "5px";
+    moveDiv.appendChild(btn);
+  });
+  document.getElementById('switchBtn').onclick = switchPlayerPokemon;
 }
 
-// ==================== BATTLE LOGIC ====================
-function playerAttackTurn(){
-  const move=randomChoice(moves[player.type.split("/")[0]]);
-  enemyHP-=move.power;
-  if(enemyHP<=0){
-    level++;
-    checkEvolution();
-    playerHP=player.hp+level*2;
-    currentGym++;
-    renderBattle(`You defeated ${enemy.name}! Level up!`);
-    setTimeout(nextGym,1500);
-    maybeDropCrate();
-    return;
+// ==================== PLAYER ATTACK ====================
+function playerAttackTurn(move){
+  enemyHP -= move.power;
+  if(enemyHP <= 0){
+    enemyTeam.shift();
+    if(enemyTeam.length > 0){
+      activeEnemy = {...enemyTeam[0]};
+      enemyHP = activeEnemy.hp + level*2;
+      renderBattle(`Enemy switched to ${activeEnemy.name}!`);
+    } else {
+      level++;
+      checkEvolution();
+      currentGym++;
+      maybeDropCrate();
+      nextGym();
+      return;
+    }
   }
   renderBattle(`You used ${move.name}! Enemy attacks next.`);
   setTimeout(enemyAttackTurn,1000);
 }
 
+// ==================== ENEMY ATTACK ====================
 function enemyAttackTurn(){
-  const move=randomChoice(moves[enemy.type.split("/")[0]]);
-  playerHP-=move.power;
-  if(playerHP<=0){
-    document.getElementById('game').innerHTML="<h3>You lost! Try again.</h3><button onclick='renderStarterSelection()'>Restart</button>";
-    return;
+  const movePool = moves[activeEnemy.type.split("/")[0]] || moves.fire;
+  const move = randomChoice(movePool);
+  playerHP -= move.power;
+  if(playerHP <= 0){
+    const remaining = playerTeam.filter(p=>p.hp > 0 && p !== activePlayer);
+    if(remaining.length > 0){
+      activePlayer = {...remaining[0]};
+      playerHP = activePlayer.hp + level*2;
+      renderBattle(`Your ${activePlayer.name} entered battle!`);
+      return;
+    } else {
+      document.getElementById('game').innerHTML = "<h3>You lost! Try again.</h3><button onclick='renderStarterSelection()'>Restart</button>";
+      return;
+    }
   }
   renderBattle(`Enemy used ${move.name}! Your turn.`);
 }
 
+// ==================== SWITCH PLAYER POKEMON ====================
+function switchPlayerPokemon(){
+  const gameDiv = document.getElementById('game');
+  gameDiv.innerHTML = "<h3>Choose a Pokémon to switch:</h3>";
+  playerTeam.forEach((poke)=>{
+    if(poke !== activePlayer){
+      const btn = document.createElement('button');
+      btn.innerHTML = `<img src="${poke.img}" width="50"><br>${poke.name} HP:${poke.hp}`;
+      btn.onclick = ()=>{
+        activePlayer = {...poke};
+        playerHP = activePlayer.hp + level*2;
+        renderBattle(`You switched to ${activePlayer.name}`);
+      };
+      btn.style.margin = "10px";
+      gameDiv.appendChild(btn);
+    }
+  });
+}
+
 // ==================== EVOLUTION ====================
 function checkEvolution(){
-  const evoLine=starters.find(s=>s.line.some(p=>p.name===player.name)).line;
-  if(evoLine[evoStage].evolveLevel && level>=evoLine[evoStage].evolveLevel && evoStage<evoLine.length-1){
-    evoStage++;
-    player={...evoLine[evoStage]};
-    playerTeam[playerTeam.length-1]={...player};
-    renderBattle(`Your Pokémon evolved into ${player.name}! 🎉`);
+  const evoLine = starters.find(s=>s.line.some(p=>p.name===activePlayer.name)).line;
+  const stage = evoLine.findIndex(p=>p.name===activePlayer.name);
+  if(evoLine[stage].evolveLevel && level >= evoLine[stage].evolveLevel && stage < evoLine.length-1){
+    activePlayer = {...evoLine[stage+1]};
+    playerTeam[playerTeam.findIndex(p=>p.name===activePlayer.name)] = {...activePlayer};
+    renderBattle(`Your Pokémon evolved into ${activePlayer.name}! 🎉`);
   }
 }
 
 // ==================== CRATE ====================
 function maybeDropCrate(){
   if(Math.random()<0.5){
-    const newPoke=randomChoice(starters).line[0];
+    const newPoke = randomChoice(starters).line[0];
     playerTeam.push({...newPoke});
     alert(`You found a crate! You got a ${newPoke.name}!`);
   }
